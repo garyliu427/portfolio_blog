@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .heroButton {
+    @apply px-4 uppercase text-base tracking-widest text-gray-500 transition-all hover:text-[#000000];
+  }
+}
