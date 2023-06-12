@@ -9,12 +9,12 @@ export default function Home() {
         <div className="">About</div>
 
       </section> */}
-      <section
+      {/* <section
         id="skills"
         className="flex flex-col items-center justify-center"
       >
         <SkillsPage />
-      </section>
+      </section> */}
 
       {/* <section
         id="projects"

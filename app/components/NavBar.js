@@ -9,7 +9,7 @@ function NavBar() {
       <div className="sticky top-0 p-10 flex justify-between items-center max-w-7xl mx-auto z-1 xl:items-center">
         <div className="flex flex-row items-center text-xl">
           <span>Xiaotian</span>
-          <Link href="#">
+          <Link href="/">
             <span>
               <Image src="/bunny.svg" alt="me" width={50} height={50} />
             </span>
@@ -18,16 +18,16 @@ function NavBar() {
         </div>
 
         <div className="flex flex-row items-center">
-          <Link href="#about">
+          <Link href="about">
             <button className="heroButton">About</button>
           </Link>
-          <Link href="#skills">
+          <Link href="skills">
             <button className="heroButton">Skills</button>
           </Link>
-          <Link href="#projects">
+          <Link href="projects">
             <button className="heroButton">Projects</button>
           </Link>
-          <Link href="#blog">
+          <Link href="blogs">
             <button className="heroButton">Blogs</button>
           </Link>
         </div>

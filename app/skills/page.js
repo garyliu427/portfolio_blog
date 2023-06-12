@@ -3,7 +3,8 @@ import Image from 'next/image';
 
 export default function SkillsPage() {
   return (
-    <>
+    <div>
+      <NavBar />
       <h1 className="flex flex-row justify-center items-center text-3xl">
         Skills
       </h1>
@@ -121,6 +122,6 @@ export default function SkillsPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
