@@ -5,7 +5,7 @@ export default function BlogsPage() {
     <div>
       <NavBar />
       <h1 className="flex flex-row justify-center items-center text-3xl">
-        Blogs
+        2023
       </h1>
     </div>
   );

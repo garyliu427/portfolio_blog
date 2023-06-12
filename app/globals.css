@@ -4,6 +4,10 @@
 
 @layer components {
   .heroButton {
-    @apply px-4 uppercase text-base tracking-widest text-gray-500 transition-all hover:text-[#000000];
+    @apply px-2 text-xs md:px-4 sm:text-base uppercase md:text-lg tracking-widest text-gray-500 transition-all hover:text-[#000000];
+  }
+
+  .techButton {
+    @apply px-2 text-xs md:px-4 sm:text-base uppercase md:text-lg tracking-widest text-gray-700 bg-cyan-400;
   }
 }

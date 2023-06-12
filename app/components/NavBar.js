@@ -6,21 +6,18 @@ import Image from 'next/image';
 function NavBar() {
   return (
     <header>
-      <div className="sticky top-0 p-10 flex justify-between items-center max-w-7xl mx-auto z-1 xl:items-center">
+      <div className="p-5 md:p-10 flex justify-between items-center max-w-7xl mx-auto z-1 xl:items-center">
         <div className="flex flex-row items-center text-xl">
-          <span>Xiaotian</span>
+          <span className="hidden md:block">Xiaotian</span>
           <Link href="/">
-            <span>
+            <span className="block">
               <Image src="/bunny.svg" alt="me" width={50} height={50} />
             </span>
           </Link>
-          <span>Liu</span>
+          <span className="hidden md:block">Liu</span>
         </div>
 
         <div className="flex flex-row items-center">
-          <Link href="about">
-            <button className="heroButton">About</button>
-          </Link>
           <Link href="skills">
             <button className="heroButton">Skills</button>
           </Link>
@@ -48,6 +45,13 @@ function NavBar() {
             fgColor="gray"
             bgColor="transparent"
           />
+          <div className="hidden md:block">
+            <SocialIcon
+              url="mailto:xiaotian.liu1@outlook.com"
+              fgColor="gray"
+              bgColor="transparent"
+            />
+          </div>
         </div>
       </div>
     </header>
