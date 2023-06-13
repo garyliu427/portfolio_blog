@@ -18,13 +18,13 @@ function NavBar() {
         </div>
 
         <div className="flex flex-row items-center">
-          <Link href="skills">
+          <Link href="/skills">
             <button className="heroButton">Skills</button>
           </Link>
-          <Link href="projects">
+          <Link href="/projects">
             <button className="heroButton">Projects</button>
           </Link>
-          <Link href="blogs">
+          <Link href="/blogs">
             <button className="heroButton">Blogs</button>
           </Link>
         </div>

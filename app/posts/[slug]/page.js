@@ -17,14 +17,17 @@ const PostLayout = ({ params }) => {
   return (
     <>
       <NavBar />
-      <article className="py-8 mx-auto max-w-xl">
-        <div className="mb-8 text-center">
-          <time dateTime={post.date} className="mb-1 text-xs text-gray-600">
-            {format(parseISO(post.date), 'LLLL d, yyyy')}
-          </time>
-          <h1>{post.title}</h1>
+      <article className="py-8 mx-auto md:max-w-[80%] max-w-[80%]">
+        <h1 className="text-center text-4xl mb-4">{post.title}</h1>
+        <time
+          dateTime={post.date}
+          className="block mb-4 text-center text-lg text-gray-600"
+        >
+          {format(parseISO(post.date), 'LLLL d, yyyy')}
+        </time>
+        <div className="text-lg leading-8 max-w-4xl mx-auto">
+          <Content />
         </div>
-        <Content />
       </article>
     </>
   );
