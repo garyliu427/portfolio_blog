@@ -5,9 +5,6 @@ export default function SkillsPage() {
   return (
     <div>
       <NavBar />
-      <h1 className="flex flex-row justify-center items-center text-2xl md:text-3xl pb-5">
-        Skills
-      </h1>
       <div className="flex flex-col text-center max-w-7xl xl:flex-row xl:px-10 justify-center xl:space-y-0 mx-auto items-center">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 m-5">
           <div className="bg-gray-200 w-full rounded-lg">
@@ -74,7 +71,7 @@ export default function SkillsPage() {
               </div>
               <div className="flex flex-col items-center justify-center">
                 <Image src="/nextjs.svg" alt="next" width={50} height={50} />
-                <h3 className="my-2">nextjs.js</h3>
+                <h3 className="my-2">Nextjs.js</h3>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <Image src="/mui.svg" alt="mui" width={50} height={50} />

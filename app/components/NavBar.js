@@ -34,16 +34,19 @@ function NavBar() {
             url="https://github.com/garyliu427"
             fgColor="gray"
             bgColor="transparent"
+            target="_blank"
           />
           <SocialIcon
             url="https://instagram.com/garyx.liu"
             fgColor="gray"
             bgColor="transparent"
+            target="_blank"
           />
           <SocialIcon
             url="https://www.linkedin.com/in/xiaotian-liu-016137149/"
             fgColor="gray"
             bgColor="transparent"
+            target="_blank"
           />
           <div className="hidden md:block">
             <SocialIcon
