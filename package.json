@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && contentlayer build",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
@@ -25,13 +25,16 @@
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.9.0",
     "react-social-icons": "^5.15.0",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-pretty-code": "^0.9.8",
     "rehype-slug": "^5.1.0",
     "remark-gfm": "^3.0.1",
     "shiki": "^0.14.2",
-    "tailwindcss": "3.3.2"
+    "tailwindcss": "3.3.2",
+    "three": "^0.153.0",
+    "vanta": "^0.5.24"
   },
   "devDependencies": {
     "prettier": "^2.8.8"

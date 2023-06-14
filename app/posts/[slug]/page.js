@@ -3,14 +3,6 @@ import { allPosts } from 'contentlayer/generated';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import NavBar from '../../components/NavBar';
 
-export const generateStaticParams = async () =>
-  allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
-
-export const generateMetadata = ({ params }) => {
-  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
-  return { title: post.title };
-};
-
 const PostLayout = ({ params }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
   const Content = getMDXComponent(post.body.code);

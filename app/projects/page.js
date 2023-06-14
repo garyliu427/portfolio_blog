@@ -13,7 +13,9 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 m-5">
           <div className="flex flex-col items-center justify-center rounvded shadow-xl">
             <Image src={Movie} alt="movie" />
-            <h1 className="text-xl my-2">MoviePalooza - Movie Review System</h1>
+            <h1 className="text-xl my-2 max-w-[90%]">
+              MoviePalooza - Movie Review System
+            </h1>
             <p className="text-sm mb-4 max-w-xs sm:max-w-lg lg:max-w-sm">
               Inspired by <span className="font-bold">Letterboxd</span>. Users
               can sign up and log in to access the platform, where they can
@@ -43,7 +45,7 @@ export default function ProjectsPage() {
           </div>
           <div className="flex flex-col items-center justify-center rounded overflow-hidden shadow-xl">
             <Image src={Nail} alt="nail" />
-            <h1 className="text-xl my-2">Nail Salon</h1>
+            <h1 className="text-xl my-2 max-w-[90%]">Nail Salon</h1>
             <p className="text-sm mb-4 max-w-xs sm:max-w-lg lg:max-w-sm">
               A commercial nail salon website to provide price information.
               Through the implementation of responsive design, it seamlessly
@@ -69,10 +71,17 @@ export default function ProjectsPage() {
           </div>
           <div className="flex flex-col items-center justify-center rounvded shadow-xl">
             <Image src={BudgetWise} alt="budget" />
-            <h1 className="text-xl my-2">
+            <h1 className="text-xl my-2 max-w-[90%]">
               BudgetWise - Financial Management Tool
             </h1>
-            <p className="text-sm mb-4 max-w-xs sm:max-w-lg lg:max-w-sm"></p>
+            <p className="text-sm mb-4 max-w-xs sm:max-w-lg lg:max-w-sm">
+              This financial management tool offers users a convenient way to
+              monitor their daily expenses and incomes. It is developed using
+              React and Redux for the frontend, while the backend utilizes
+              Flask. MySQL database efficiently stores all relevant data. The
+              application is deployed on Heroku for the database, Render for the
+              backend, and Vercel for the frontend.
+            </p>
             <div className="flex gap-5">
               <Image src="/react.svg" alt="react" width={30} height={30} />
               <Image src="/redux.svg" alt="redux" width={30} height={30} />
@@ -104,7 +113,7 @@ export default function ProjectsPage() {
               />
             </div>
           </div>
-          <div>Hi</div>
+          <div>Continue...</div>
         </div>
       </div>
     </div>

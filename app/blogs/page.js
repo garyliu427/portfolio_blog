@@ -5,7 +5,7 @@ import { allPosts } from 'contentlayer/generated';
 
 function PostCard(post) {
   return (
-    <div className="flex flex-col justify-center mb-8">
+    <div className="mb-8">
       <h2 className="text-2xl hover:text-blue-500 mb-4">
         <Link href={post.slug}>{post.title}</Link>
       </h2>
@@ -40,17 +40,17 @@ export default function BlogsPage() {
   return (
     <div>
       <NavBar />
-      <div className="flex justify-center">
-        <div className="max-w-7xl">
-          {years.map((year) => (
-            <div key={year}>
-              <h2 className="text-2xl my-4 text-gray-400 max-w-7xl">{year}</h2>
+      <div className="ml-[20%] md:ml-[35%]">
+        {years.map((year) => (
+          <div key={year}>
+            <h2 className="text-2xl my-4 text-gray-400 max-w-7xl">{year}</h2>
+            <div className="flex justify-start">
               {postsByYear[year].map((post, idx) => (
                 <PostCard key={idx} {...post} />
               ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
