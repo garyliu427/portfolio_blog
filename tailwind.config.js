@@ -15,6 +15,10 @@ module.exports = {
       fontFamily: {
         Martel: ['Martel Sans', 'sans-serif'],
       },
+      colors: {
+        'code-gray': '#f5f7f9',
+        'inline-code-gray': '#e7e9ed',
+      },
     },
   },
   plugins: [],

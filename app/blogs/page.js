@@ -40,11 +40,11 @@ export default function BlogsPage() {
   return (
     <div>
       <NavBar />
-      <div className="ml-[20%] md:ml-[35%]">
+      <div className="flex flex-col ml-[20%] md:ml-[35%]">
         {years.map((year) => (
           <div key={year}>
             <h2 className="text-2xl my-4 text-gray-400 max-w-7xl">{year}</h2>
-            <div className="flex justify-start">
+            <div className="flex flex-col justify-start">
               {postsByYear[year].map((post, idx) => (
                 <PostCard key={idx} {...post} />
               ))}

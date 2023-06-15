@@ -16,7 +16,7 @@ export default function Home() {
           el: vantaRef.current,
           mouseControls: true,
           touchControls: true,
-          gyroControls: false,
+          gyroControls: true,
           minHeight: 200.0,
           minWidth: 200.0,
           scale: 1.0,
@@ -40,7 +40,12 @@ export default function Home() {
       <section className="flex flex-col items-center justify-center max-w-5xl mx-auto py-1 mt-28">
         <div className="fixed flex w-full h-screen z-[-2]" ref={vantaRef}></div>
         <div className="max-w-3xl z-10 mr-36 ml-10 md:ml-0">
-          <h1 className="text-4xl pb-5 text-bold">Front-End Developer</h1>
+          <h1 className="text-4xl pb-5 text-bold">
+            <span className="underline decoration-red-400 underline-offset-8">
+              Front-End
+            </span>{' '}
+            Developer
+          </h1>
           <p className="max-w-xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
             veniam repellat quibusdam quas, ipsa voluptatibus delectus nisi

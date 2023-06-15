@@ -12,7 +12,7 @@ export default function ProjectsPage() {
       <div className="flex flex-col max-w-8xl xl:flex-row xl:px-10 justify-center xl:space-y-0 mx-auto items-center">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 m-5">
           <div className="flex flex-col items-center justify-center rounvded shadow-xl">
-            <Image src={Movie} alt="movie" />
+            <Image src={Movie} alt="movie" priority />
             <h1 className="text-xl my-2 max-w-[90%]">
               MoviePalooza - Movie Review System
             </h1>
@@ -44,7 +44,7 @@ export default function ProjectsPage() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center rounded overflow-hidden shadow-xl">
-            <Image src={Nail} alt="nail" />
+            <Image src={Nail} alt="nail" priority />
             <h1 className="text-xl my-2 max-w-[90%]">Nail Salon</h1>
             <p className="text-sm mb-4 max-w-xs sm:max-w-lg lg:max-w-sm">
               A commercial nail salon website to provide price information.
@@ -70,7 +70,7 @@ export default function ProjectsPage() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center rounvded shadow-xl">
-            <Image src={BudgetWise} alt="budget" />
+            <Image src={BudgetWise} alt="budget" priority />
             <h1 className="text-xl my-2 max-w-[90%]">
               BudgetWise - Financial Management Tool
             </h1>

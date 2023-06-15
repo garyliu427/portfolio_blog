@@ -1,0 +1,127 @@
+---
+title: React Context 阅读笔记
+date: 2023-06-15
+description: usecontext, createcontext 用法与实战
+---
+
+Context 的作用在于父组件可以共享其状态给子孙组件但并不是通过层层传递的方式。相比于 prop 层层传递的方法，它避免通过中间元素传递值从而解决了 props drilling 的问题。
+
+## 如何使用 Context？
+
+第一步：创建一个独立的 Context 对象
+
+```js filename="MyContext.js"
+import { createContext } from 'react';
+export const MyContext = createContext(defaultValue);
+```
+
+第二步：在需要共享数据的组件中使用 useContext 获取数据
+
+```js filename="Successor.js"
+import { useContext } from 'react';
+import { MyContext } from './MyContext';
+export default function Successor() {
+  const value = useContext(MyContext);
+  // ...
+}
+```
+
+第三步：使用 Provider 组件包裹需要共享数据的组件树
+
+```js filename="App.js"
+import { MyContext } from './MyContext';
+export default function Root() {
+  return (
+    <MyContext.Provider value={/* the value you want to pass */}>
+      {...}
+    </MyContext.Provider>
+  );
+  // ...
+}
+```
+
+## 何种情况使用 Context?
+
+1. Theming 主题颜色
+
+2. 当前登录账号
+
+3. 路由
+
+4. 状态管理：与 reducer 配合使用
+
+---
+
+## Theming -> Dark/Light Mode 研究
+
+当设计一个合格的黑白模式的网站时，我们需要考虑：
+
+二个原则：
+
+1. 网站的可访问性 i.e.是否具有高对比度
+
+2. 网站的层次感 i.e.上层元素背景颜色应该比下层的要亮
+
+三大颜色块：
+
+1. 表面颜色
+
+   可以理解为网站背景，菜单，导航栏，模块的颜色
+
+2. 元素颜色
+
+   元素颜色是指字体颜色、水平线、边框、表格以及任何需要与背景分开的其他内容。
+   
+   一个中心思想就是确保背景和文本的组合满足对比度要求。
+
+3. 标志性颜色
+
+   标志性颜色是指网站中的一类二类三类(Primary, Secondary, Tertiary, etc.)的提示类视觉元素。
+
+构建自己的调色盘时，遵从黑暗模式的元素颜色为白色，表面颜色为黑色。而明亮模式与之相反。标志颜色则稍微不同，明亮模式下的同级标志颜色通常比黑暗模式下的更深。
+可以使用辅助工具 Tailwindcss shades generator 或 Material Design palette generator 来构建自己的调色盘。
+
+表面颜色最好使用`#121212`，以它作为基地根据上述原则进行变化。
+
+明亮模式下一类颜色通常使用阴影值为 600 的颜色，黑暗模式下则使用阴影值为 200 的颜色。
+
+## 代码实践
+
+```js filename="app.js"
+import React, { createContext, useContext, useState } from 'react';
+import { createContext } from 'react';
+import ReactSwitch from 'react-switch';
+
+export const ThemeContext = createContext(null);
+
+function App() {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme((cur) => (cur === 'light' ? 'dark' : 'light'));
+  };
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className="App" id={theme}>
+        <YourContent />
+        <div className="switch">
+          <label> {theme === 'light' ? 'Light Mode' : 'Dark Mode'}</label>
+          <ReactSwitch onChange={toggleTheme} checked={theme === 'dark'} />
+        </div>
+      </div>
+    </ThemeContext.Provider>
+  );
+}
+```
+
+```css filename="app.css"
+#light {
+  background-color: #fff;
+  color: #121212;
+}
+
+#black {
+  background-color: #121212;
+  color: #fff;
+}
+```

@@ -1,11 +1,12 @@
 import { format, parseISO } from 'date-fns';
 import { allPosts } from 'contentlayer/generated';
-import { getMDXComponent } from 'next-contentlayer/hooks';
+import { getMDXComponent, useMDXComponent } from 'next-contentlayer/hooks';
 import NavBar from '../../components/NavBar';
+import MDXComponents from '../../components/MDXComponents';
 
 const PostLayout = ({ params }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
-  const Content = getMDXComponent(post.body.code);
+  const MDXContent = useMDXComponent(post.body.code);
   return (
     <>
       <NavBar />
@@ -14,8 +15,8 @@ const PostLayout = ({ params }) => {
         <time dateTime={post.date} className="block mb-4 text-lg text-gray-600">
           {format(parseISO(post.date), 'LLLL d, yyyy')}
         </time>
-        <div className="text-lg leading-8">
-          <Content />
+        <div className="leading-8">
+          <MDXContent components={MDXComponents} />
         </div>
       </article>
     </>
