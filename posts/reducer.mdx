@@ -1,0 +1,151 @@
+---
+title: React Reducer
+date: 2023-06-17
+description: reducer阅读笔记
+---
+
+随着组件设计的更加复杂，状态更新就会变得困难，所以需要借助 reducer 帮助我们绑定管理一系列状态。
+
+useState 跟 useReducer 完全可以平替，只不过建议当 state 达到 3 个以上的时候可以考虑换成 useReducer 增加代码可读性。少量的 state 用 useState 钩子完全可以应付。
+
+如何从 useState 转到 useReducer
+
+1. 删处 state 逻辑，只保留操作函数例如 handleSomething()，取而代之的是分配动作
+
+```
+function handleSomething() {
+  dispatch(
+    // action object
+    {
+    type: '自定义的操作',
+    ...
+    }
+  );
+}
+```
+
+对象中通常有一个 type 属性用来区分需要干什么
+
+2. 写 reducer 函数
+
+接受两个参数，第一个参数是状态 state，第二个参数是行为 action，返回值是新的状态 state。如果程序有多个状态而一个 action 只需要负责一个状态的改变时，剩余状态应保持原样直接返回。
+
+```
+function stateReducer(state, action) {
+    ...
+}
+```
+
+3. 组件中使用 reducer
+
+此时需要引入钩子函数 useReducer。它接受两个参数，第一个为步骤 2 里的 reducer 函数，第二个为状态初始值
+
+`const [state, dispatch] = useReducer(stateReducer, initialState);`
+
+## 代码实战
+
+首先只用 useState 实现一个计数器
+
+```js
+import { useState } from "react";
+
+export default function App() {
+  const [number, setNumber] = useState(0);
+
+  const handleAdd = () => {
+    setNumber((prev) => prev + 1);
+  };
+
+  const handleMinus = () => {
+    setNumber((prev) => prev - 1);
+  };
+
+  return (
+    <div className="App">
+      <div>{number}</div>
+      <button onClick={handleAdd}>Add</button>
+      <button onClick={handleMinus}>Minus</button>
+    </div>
+  );
+}
+```
+
+现在我们开始改写
+
+1. 删掉 state 设置逻辑，取而代之的是分配动作
+
+```js
+import { useState } from "react";
+
+export default function App() {
+  const [number, setNumber] = useState(0);
+
+  const handleAdd = () => {
+    dispatch({ type: "add" });
+  };
+
+  const handleMinus = () => {
+    dispatch({ type: "minus" });
+  };
+
+  return (
+    <div className="App">
+      <div>{number}</div>
+      <button onClick={handleAdd}>Add</button>
+      <button onClick={handleMinus}>Minus</button>
+    </div>
+  );
+}
+```
+
+在上述代码中，动作 action 指的就是`{ type: "add" }`和`{ type: "minus" }`
+
+2. 写 reducer 函数，
+
+tip. 通常使用 switch 而不是 if statement.
+
+```js
+const numberReducer = (number, action) => {
+  switch (action.type) {
+    case "add": {
+      return {
+        number + 1;
+      }
+    }
+    case "minus": {
+      return {
+        number - 1;
+      }
+    }
+    default: {
+      return number;
+    }
+  }
+};
+```
+
+3. 组件中使用 reducer 函数
+
+```js
+import { useReducer } from "react";
+
+export default function App() {
+  const [number, dispatch] = useReducer(numberReducer, 0);
+
+  const handleAdd = () => {
+    dispatch({ type: "add" });
+  };
+
+  const handleMinus = () => {
+    dispatch({ type: "minus" });
+  };
+
+  return (
+    <div className="App">
+      <div>{number}</div>
+      <button onClick={handleAdd}>Add</button>
+      <button onClick={handleMinus}>Minus</button>
+    </div>
+  );
+}
+```
