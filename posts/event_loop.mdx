@@ -1,0 +1,96 @@
+---
+title: Event Loop 梳理
+date: 2023-6-25
+description: event loop 原理与练习
+---
+
+## Event Loop 执行顺序
+
+任务分为同步任务跟异步任务，而异步任务又分为宏任务跟微任务，同步任务会在主线程上执行，形成一个执行栈，而异步任务会在异步任务队列中等待主线程空闲后，才会进入主线程执行，而异步任务队列又分为宏任务队列跟微任务队列，微任务队列的优先级高于宏任务队列，当主线程上的执行栈为空时，会先执行微任务队列中的任务，然后再执行宏任务队列中的任务，如此循环往复，这就是 Event Loop 的执行顺序。
+
+一个事件循环：
+
+1. dequeue 1 task
+2. execute until the call stack is empty
+3. execute all the microtasks until microstask is empty
+4. render DOM changes
+5. go to step 1
+
+注意事项：
+
+1. Timers are not exact
+2. Promise callbacks can be delayed
+3. Slow tasks can be completely blocking
+
+一句话总结：全局开始 -> 先处理所有同步任务（Call Stack 中） -> 无同步任务后，微任务依次进 Stack -> 微任务处理完后，宏任务进 Stack
+
+## 宏任务与微任务
+
+宏任务：setTimeout、setInterval、setImmediate、I/O、UI rendering, requestAnimationFrame
+
+微任务：Promise.then/catch/finally、async await、process.nextTick、MutationObserver, queueMicrotask
+
+## 练习题实战
+
+```js
+console.log(1);
+function a() {
+  console.log(2);
+  b();
+}
+
+function b() {
+  setTimeout(() => {
+    console.log(3);
+    new Promise((resolve) => {
+      console.log(9);
+      resolve();
+    }).then(() => {
+      console.log(10);
+    });
+  }, 0);
+  console.log(4);
+}
+
+a();
+
+new Promise((resolve) => {
+  console.log(5);
+  resolve();
+}).then(() => {
+  console.log(6);
+  setTimeout(() => {
+    console.log(7);
+  }, 0);
+});
+
+console.log(8);
+```
+
+答案：1 2 4 5 8 6 3 9 10 7
+
+```js
+console.log(1);
+setTimeout(() => console.log(2), 1000);
+setTimeout(() => console.log(3), 0);
+console.log(4);
+```
+
+答案：1 4 3 2
+
+```js
+function logOne() {
+  console.log(1);
+}
+function main() {
+  setTimeout(logOne, 0);
+  Promise.resolve(2)
+    .then((val) => val * 2)
+    .then(console.log);
+  console.log(3);
+}
+
+main();
+```
+
+答案：3 4 1

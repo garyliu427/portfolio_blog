@@ -1,0 +1,35 @@
+---
+title: JavaScript 日期对象梳理
+date: 2023-6-19
+description:
+---
+
+## 1. Date 对象
+
+```js
+let now = new Date();
+console.log(now);
+```
+
+在 IDE 中会显示当前零时区时间，而在浏览器中会以字符串的形式显示当前时区的时间。
+例如 2023-06-19T05:34:46.290Z
+Mon Jun 19 2023 15:36:37 GMT+1000 (澳大利亚东部标准时间)
+
+## 2. Date 对象的方法
+
+为了得到更准确的时间，可以通过传参的方式来创建 Date 对象。通过毫秒公式计算或者字符串格式的时间来创建 Date 对象。
+
+```js
+let 2023Firstday = new Date(2023, 0, 1); # year (4 digits must! Do not write 2), month (0~11), date (starting from 1)
+let 2023Firstday = new Date("2023-01-01");
+let 2023SecondDay_2pm30_1ms = new Date(2023, 0, 2, 14, 30, 0, 1); # year, month, date, hour, minute, second, millisecond
+```
+
+getFullYear()
+getMonth()
+getDate()
+getHours()
+getMinutes()
+getSeconds()
+getMilliseconds()
+getDay() # 0~6 (0 是周日)

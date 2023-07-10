@@ -1,6 +1,6 @@
 import { format, parseISO } from 'date-fns';
 import { allPosts } from 'contentlayer/generated';
-import { getMDXComponent, useMDXComponent } from 'next-contentlayer/hooks';
+import { useMDXComponent } from 'next-contentlayer/hooks';
 import NavBar from '../../components/NavBar';
 import MDXComponents from '../../components/MDXComponents';
 

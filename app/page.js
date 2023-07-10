@@ -37,25 +37,27 @@ export default function Home() {
   return (
     <main className="h-screen">
       <NavBar />
-      <section className="flex flex-col items-center justify-center max-w-5xl mx-auto py-1 mt-28">
+      <section className="flex flex-col items-center justify-center max-w-5xl mx-auto py-1 mt-10 md:mt-28">
         <div className="fixed flex w-full h-screen z-[-2]" ref={vantaRef}></div>
-        <div className="max-w-3xl z-10 mr-36 ml-10 md:ml-0">
+        <div className="max-w-3xl z-10 mr-32 ml-10 md:ml-0">
           <h1 className="text-4xl pb-5 text-bold">
             <span className="underline decoration-red-400 underline-offset-8">
               Front-End
             </span>{' '}
             Developer
           </h1>
-          <p className="max-w-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-            veniam repellat quibusdam quas, ipsa voluptatibus delectus nisi
-            impedit, laboriosam minus fugiat? Pariatur blanditiis officia
-            doloribus ab molestias vero labore iusto.
+          <p className="max-w-xl text-base xl:text-lg">
+            Interested in full stack development and always passionate about
+            learning new technologies to write secure and scalable solutions.
+            <br />
+            <br />
+            Looking for a developer role where I can grow and learn from
+            friendly team members.
           </p>
           <h1 className="text-2xl pb-5 text-bold pt-10">
             Portfolio Tech Stack
           </h1>
-          <div className="flex flex-row gap-8">
+          <div className="flex flex-wrap xl:flex-row gap-8">
             <Image src="/nextjs.svg" alt="nextjs" width={50} height={50} />
             <Image
               src="/tailwindcss.svg"
