@@ -87,13 +87,11 @@ function NavBar() {
           bgColor="transparent"
           target="_blank"
         />
-        <div className="hidden md:block">
-          <SocialIcon
-            url="mailto:xiaotian.liu1@outlook.com"
-            fgColor="gray"
-            bgColor="transparent"
-          />
-        </div>
+        <SocialIcon
+          url="mailto:xiaotian.liu1@outlook.com"
+          fgColor="gray"
+          bgColor="transparent"
+        />
       </nav>
     </header>
   );
