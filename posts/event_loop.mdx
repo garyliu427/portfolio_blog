@@ -4,31 +4,51 @@ date: 2023-6-25
 description: event loop 原理与练习
 ---
 
+## 为什么会有事件循环？
+
+JavaScript 是一门单线程语言，因为它运行在浏览器的渲染主线程中，而渲染主线程只有一个。如果使用同步方式，极有可能导致主线程阻塞，使得页面卡死。所以浏览器采用异步方式来避免，当某些任务发生时，主线程将任务交给其他县城去处理，自身立即结束任务的执行，转而执行后续代码。
+当其他县城完成时，将回调函数包装成任务加入消息队列的末尾。主线程空闲时，会从消息队列中取出任务执行。而事件循环可以保证浏览器用不阻塞，最大限度的保证了单线程的流畅运行。
+
 ## Event Loop 执行顺序
 
-任务分为同步任务跟异步任务，而异步任务又分为宏任务跟微任务，同步任务会在主线程上执行，形成一个执行栈，而异步任务会在异步任务队列中等待主线程空闲后，才会进入主线程执行，而异步任务队列又分为宏任务队列跟微任务队列，微任务队列的优先级高于宏任务队列，当主线程上的执行栈为空时，会先执行微任务队列中的任务，然后再执行宏任务队列中的任务，如此循环往复，这就是 Event Loop 的执行顺序。
-
-一个事件循环：
-
-1. dequeue 1 task
-2. execute until the call stack is empty
-3. execute all the microtasks until microstask is empty
-4. render DOM changes
-5. go to step 1
+1. 在最开始的时候，渲染主线程会进入一个无限循环 (参考 Chromium 源码 (https://github.com/chromium/chromium/blob/main/base/message_loop/message_pump_default.cc) 第 35 行)
+2. 每一次循环检查消息队列 message queue 是否有任务存在。如果有，取出第一个任务执行，完成后进入下一次循环。如果没有，进入休眠。
+3. 其他所有线程可以随时往消息队列尾添加任务，这时候渲染主线程会被唤醒，开始下一次循环。
+   注意事项：
 
 注意事项：
 
-1. Timers are not exact
-2. Promise callbacks can be delayed
-3. Slow tasks can be completely blocking
+- 宏任务概念已经被 W3C 取消
+- Timers are not exact. If the nesting level is greater than 5, the interval is rounded up to the nearest 4ms
+- Promise callbacks can be delayed
+- Slow tasks can be completely blocking
+- 同类型的任务必须在同一个队列，不同的任务可以属于不同的队列
 
-一句话总结：全局开始 -> 先处理所有同步任务（Call Stack 中） -> 无同步任务后，微任务依次进 Stack -> 微任务处理完后，宏任务进 Stack
+## 任务的优先级
 
-## 宏任务与微任务
+微队列：Promise.then/catch/finally、async await、process.nextTick、MutationObserver, queueMicrotask （优先级最高）
 
-宏任务：setTimeout、setInterval、setImmediate、I/O、UI rendering, requestAnimationFrame
+交互队列：click、DOMContentLoaded、load、hashchange、scroll（优先级高）
 
-微任务：Promise.then/catch/finally、async await、process.nextTick、MutationObserver, queueMicrotask
+延时队列：setTimeout、setInterval、setImmediate （优先级中）
+
+队列里放的是回调函数的任务，而不是回调函数本身。回调函数本身是在其他线程执行的，执行完毕后，将回调函数包装成任务加入队列。
+
+## 解题步骤
+
+1. 画出主线程队列，并且**执行**全局同步代码（跳过变量函数申明）
+2. 画出 微队列，交互队列，延时队列
+3. 不要忘了**其他线程**，其他线程也可以向队列中添加任务
+
+渲染主线程:
+
+微队列:
+
+延时队列:
+
+交互队列:
+
+其他线程:
 
 ## 练习题实战
 
@@ -94,3 +114,5 @@ main();
 ```
 
 答案：3 4 1
+
+更多练习题：https://drive.google.com/file/d/1-LHMuN8zvHvxicPvvc5LCv2_Y8zpatxs/view?usp=sharing
