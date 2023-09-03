@@ -68,8 +68,8 @@ export default function Home() {
             <Image src="/javascript.svg" alt="js" width={50} height={50} />
             <Image src="/three.svg" alt="threejs" width={50} height={50} />
             <Image
-              src="/contentlayer.svg"
-              alt="contentlayer"
+              src="/contentful.svg"
+              alt="contentful"
               width={50}
               height={50}
             />

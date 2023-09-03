@@ -1,26 +1,33 @@
-import { format, parseISO } from 'date-fns';
-import { allPosts } from 'contentlayer/generated';
-import { useMDXComponent } from 'next-contentlayer/hooks';
+import { draftMode } from 'next/headers';
+import Date from '../../date';
+import { Markdown } from '../../../lib/markdown';
+import { getAllPosts, getPostAndMorePosts } from '../../../lib/api';
 import NavBar from '../../components/NavBar';
-import MDXComponents from '../../components/MDXComponents';
 
-const PostLayout = ({ params }) => {
-  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
-  const MDXContent = useMDXComponent(post.body.code);
+export async function generateStaticParams() {
+  const allPosts = await getAllPosts(false);
+
+  return allPosts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export default async function PostLayout({ params }) {
+  const { isEnabled } = draftMode();
+  const { post } = await getPostAndMorePosts(params.slug, isEnabled);
+
   return (
     <>
       <NavBar />
-      <article className="py-8 mx-auto md:max-w-[50%] max-w-[80%]">
+      <article className="py-8 mx-auto md:max-w-[50%] max-w-[80%] prose">
         <h1 className="text-4xl mb-4">{post.title}</h1>
         <time dateTime={post.date} className="block mb-4 text-lg text-gray-600">
-          {format(parseISO(post.date), 'LLLL d, yyyy')}
+          <Date dateString={post.date} />
         </time>
         <div className="leading-8">
-          <MDXContent components={MDXComponents} />
+          <Markdown content={post.content} />
         </div>
       </article>
     </>
   );
-};
-
-export default PostLayout;
+}
