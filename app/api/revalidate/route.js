@@ -3,7 +3,6 @@ import { revalidateTag } from 'next/cache';
 
 export async function POST(request) {
   const requestHeaders = new Headers(request.headers);
-  truncate;
   const secret = requestHeaders.get('x-vercel-reval-key');
 
   if (secret !== process.env.CONTENTFUL_REVALIDATE_SECRET) {
