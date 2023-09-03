@@ -26,7 +26,7 @@ export default async function BlogsPage() {
   return (
     <div>
       <NavBar />
-      <div className="flex flex-col ml-[20%] md:ml-[40%]">
+      <div className="flex flex-col ml-[20%] md:ml-[30%] lg:ml-[40%]">
         {allPosts.map((post) => (
           <PostPreview
             key={post.slug}
