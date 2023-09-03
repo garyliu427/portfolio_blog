@@ -1,5 +1,6 @@
 import './globals.css';
 import { Martel_Sans } from 'next/font/google';
+import { draftMode } from 'next/headers';
 
 export const metadata = {
   title: 'Xiaotian Liu',
@@ -14,7 +15,14 @@ const martel_Sans = Martel_Sans({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={martel_Sans.className}>{children}</body>
+      <body className={martel_Sans.className}>
+        {draftMode().isEnabled && (
+          <p className="bg-orange-200 py-4 px-[6vw]">
+            Draft mode is on! <ExitDraftModeLink className="underline" />
+          </p>
+        )}
+        {children}
+      </body>
     </html>
   );
 }

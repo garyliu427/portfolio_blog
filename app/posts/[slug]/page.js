@@ -15,10 +15,11 @@ export async function generateStaticParams() {
 export default async function PostLayout({ params }) {
   const { isEnabled } = draftMode();
   const { post } = await getPostAndMorePosts(params.slug, isEnabled);
+
   return (
     <>
       <NavBar />
-      <article className="py-8 mx-auto md:max-w-[50%] max-w-[80%]">
+      <article className="py-8 mx-auto md:max-w-[50%] max-w-[80%] prose">
         <h1 className="text-4xl mb-4">{post.title}</h1>
         <time dateTime={post.date} className="block mb-4 text-lg text-gray-600">
           <Date dateString={post.date} />

@@ -19,7 +19,19 @@ module.exports = {
         'code-gray': '#f5f7f9',
         'inline-code-gray': '#e7e9ed',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            pre: {
+              marginTop: '0',
+              marginBottom: '0',
+              backgroundColor: '#f5f7f9',
+              color: '#272727',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };
