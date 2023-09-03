@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
+import Link from 'next/link';
 
 function RichTextAsset({ id, assets }) {
   const asset = assets?.find((asset) => asset.sys.id === id);
