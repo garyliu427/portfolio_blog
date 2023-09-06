@@ -24,7 +24,7 @@ export default async function PostLayout({ params }) {
   return (
     <>
       <NavBar />
-      <div className="py-8 mx-auto md:max-w-[50%] max-w-[80%] prose flex justify-center">
+      <div className="py-8 mx-auto xl:max-w-[50%] lg:max-w-[70%] prose flex justify-center">
         <article>
           <h1 className="text-4xl mb-4">{post.title}</h1>
           <time
@@ -37,7 +37,7 @@ export default async function PostLayout({ params }) {
             <Markdown content={post.content} />
           </div>
         </article>
-        <aside>
+        <aside className="hidden lg:block">
           <nav className="sticky md:ml-20 top-32">
             <h4 className="mt-0 w-48 mb-6 text-lg">TABLE OF CONTENTS</h4>
             {h2Headings.map((heading, index) => (
