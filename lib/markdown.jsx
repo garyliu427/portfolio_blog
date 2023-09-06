@@ -34,7 +34,7 @@ export function Markdown({ content }) {
           assets={content.links.assets.block}
         />
       ),
-      [BLOCKS.PARAGRAPH]: (node, children, index) => {
+      [BLOCKS.PARAGRAPH]: (node, children) => {
         if (
           node.content.find((item) =>
             item.marks?.find((mark) => mark.type === 'code')
