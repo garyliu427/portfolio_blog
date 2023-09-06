@@ -24,6 +24,8 @@ export function Markdown({ content }) {
         );
       },
       [MARKS.BOLD]: (text) => <span className="font-bold">{text}</span>,
+      [MARKS.ITALIC]: (text) => <span className="italic">{text}</span>,
+      [MARKS.UNDERLINE]: (text) => <span className="underline">{text}</span>,
     },
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node) => (
@@ -32,7 +34,7 @@ export function Markdown({ content }) {
           assets={content.links.assets.block}
         />
       ),
-      [BLOCKS.PARAGRAPH]: (node, children) => {
+      [BLOCKS.PARAGRAPH]: (node, children, index) => {
         if (
           node.content.find((item) =>
             item.marks?.find((mark) => mark.type === 'code')
@@ -46,8 +48,11 @@ export function Markdown({ content }) {
             </div>
           );
         }
-
         return <p>{children}</p>;
+      },
+
+      [BLOCKS.HEADING_2]: (node, children) => {
+        return <h2 id={`section-${children}`}>{children}</h2>;
       },
 
       [INLINES.ENTRY_HYPERLINK]: (node) => {
@@ -83,6 +88,24 @@ export function Markdown({ content }) {
             />
           );
         }
+      },
+      [BLOCKS.LIST_ITEM]: (node, children) => {
+        if (
+          node.content.find((item) =>
+            item.marks?.find((mark) => mark.type === 'code')
+          )
+        ) {
+          return (
+            <li>
+              <div className="overflow-x-auto max-w-lg">
+                <pre className="overflow-x-auto max-w-lg">
+                  <code>{children}</code>
+                </pre>
+              </div>
+            </li>
+          );
+        }
+        return <li>{children}</li>;
       },
     },
   });
